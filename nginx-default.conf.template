@@ -1,0 +1,16 @@
+server {
+    listen       ${PORT};
+    server_name  _;
+
+    root   /usr/share/nginx/html;
+    index  index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Cache static content briefly; the page itself is a single file
+    location = /index.html {
+        add_header Cache-Control "public, max-age=300";
+    }
+}
